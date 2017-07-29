@@ -10,7 +10,7 @@ You are responsible for all of the interactions with the Alexa voice skill. For 
 
 ## Security
 
-Once you set up your Alexa voice skill, you are authorising Alexa to provide information to the skill. This means that you are responsible for how the Alexa voice skill is used, including any communication to or from the skill itself.
+By using this skill, you are authorising Alexa to provide information to the skill. This means that you are responsible for how the Alexa voice skill is used, including any communication to or from the skill itself.
 
 To prevent unauthorised disclosure or access to your information, we rely on Alexa's (Amazon's) physical and electronic security safeguards.
 
