@@ -92,7 +92,7 @@ const getNextBinCollectionDetails = function () {
                 const postcode = addressResponse.address['postalCode'].replace(' ', '+'); // formatting for the request to Pboro Council
                 console.log("Postcode successfully retrieved, now responding to user." + postcode);
 
-                __pboroCouncilRequest()
+                __pboroCouncilRequest(postcode)
                     .then(($) => {
                         console.log('received response from council');
                         let collectionCalendar = __createBinCalendarFromResponse($);
@@ -123,7 +123,7 @@ const getBinDay = function () {
                 const postcode = addressResponse.address['postalCode'].replace(' ', '+'); // formatting for the request to Pboro Council
                 console.log("Postcode successfully retrieved, now responding to user." + postcode);
 
-                __pboroCouncilRequest()
+                __pboroCouncilRequest(postcode)
                     .then(($) => {
                         console.log('received response from council');
                         let collectionDay = $('.i3-bin-collection-day').text();
@@ -147,7 +147,7 @@ const getBinDay = function () {
         });
 };
 
-const __pboroCouncilRequest = function () {
+const __pboroCouncilRequest = function (postcode) {
     return rp({
         uri: 'https://www.peterborough.gov.uk/residents/rubbish-and-recycling/bins/?postcode=' + postcode,
         agent: https.globalAgent,
@@ -191,10 +191,6 @@ const __handleResponse = function (addressResponse, okFunction) {
     }
 };
 
-/**
- * This is the handler for our custom GetAddress intent.
- * Refer to the Intents.js file for documentation.
- */
 const __getPostcode = function (caller) {
     console.info("Starting getAddressHandler()");
 
