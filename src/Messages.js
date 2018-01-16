@@ -12,6 +12,7 @@ const GOODBYE = "Bye! Thanks for using the Peterborough Bins Skill!";
 const UNHANDLED = "This skill doesn't support that. Please ask something else.";
 const HELP = "You can use this skill by asking something like: when do the bins need putting out? Or you can ask, what day are my bins collected? What would you like to ask?";
 const HERES_YOUR_BIN_DAY = "Your bins are going to be collected on";
+const HERES_YOUR_BIN_TYPES = "The types of bin being collected this week are ";
 const NO_INFORMATION_FOUND = "I'm sorry, but I couldn't find any information with Peterborough Council for the postcode ";
 
 module.exports = {
@@ -27,5 +28,6 @@ module.exports = {
     "UNHANDLED": UNHANDLED,
     "HELP": HELP,
     "HERES_YOUR_BIN_DAY": HERES_YOUR_BIN_DAY,
+    "HERES_YOUR_BIN_TYPES": HERES_YOUR_BIN_TYPES,
     "NO_INFORMATION_FOUND": NO_INFORMATION_FOUND
 };
