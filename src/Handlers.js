@@ -99,7 +99,11 @@ const getNextBinCollectionDetails = function () {
                         if (collectionCalendar) {
                             let nextCollectionTypes = collectionCalendar[0];
                             console.log(nextCollectionTypes); // first one is closest to today
-                            this.emit(':tellWithCard', Messages.HERES_YOUR_BIN_TYPES + nextCollectionTypes.types, 'Bin Collection Day');
+                            if(nextCollectionTypes) {
+                                this.emit(':tellWithCard', Messages.HERES_YOUR_BIN_TYPES + nextCollectionTypes.types, 'Bin Collection Day');
+                            } else {
+                                this.emit(":tell", `${Messages.NO_INFORMATION_FOUND} <say-as interpret-as="spell-out">${addressResponse.address['postalCode']}</say-as>`);
+                            }
                         } else {
                             this.emit(':tell', `${Messages.NO_INFORMATION_FOUND} <say-as interpret-as="spell-out">${addressResponse.address['postalCode']}</say-as>`);
                         }
