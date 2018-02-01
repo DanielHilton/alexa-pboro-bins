@@ -197,24 +197,22 @@ const __handleResponse = function (addressResponse, okFunction) {
 
 const __getPostcode = function (caller) {
     console.info("Starting getAddressHandler()");
+    try {
+        const consentToken = caller.event.context?.System?.user?.permissions?.consentToken;
+        const deviceId = caller.event.context.System.device.deviceId;
+        const apiEndpoint = caller.event.context.System.apiEndpoint;
+        const alexaDeviceAddressClient = new PostcodeClient(apiEndpoint, deviceId, consentToken);
 
-    const consentToken = caller.event.context.System.user.permissions.consentToken;
+        return alexaDeviceAddressClient.getCountryAndPostalCode();
+    } catch {
+        // If we have not been provided with a consent token, this means that the user has not
+        // authorized your skill to access this information. In this case, you should prompt them
+        // that you don't have permissions to retrieve their address.
 
-    // If we have not been provided with a consent token, this means that the user has not
-    // authorized your skill to access this information. In this case, you should prompt them
-    // that you don't have permissions to retrieve their address.
-    if (!consentToken) {
         this.emit(":tellWithPermissionCard", Messages.NOTIFY_MISSING_PERMISSIONS, PERMISSIONS);
         console.log("User did not give us permissions to access their address.");
         console.info("Ending getAddressHandler()");
-        return;
     }
-
-    const deviceId = caller.event.context.System.device.deviceId;
-    const apiEndpoint = caller.event.context.System.apiEndpoint;
-    const alexaDeviceAddressClient = new PostcodeClient(apiEndpoint, deviceId, consentToken);
-
-    return alexaDeviceAddressClient.getCountryAndPostalCode();
 };
 
 const handlers = {};
